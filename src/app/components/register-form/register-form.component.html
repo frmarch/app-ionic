@@ -1,0 +1,52 @@
+<mat-card>
+  <h2>Crear cuenta</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="name?.hasError('required') && name?.touched">
+        El nombre es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required>
+      <mat-error *ngIf="email?.hasError('required') && email?.touched">
+        El email es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="email?.hasError('email') && email?.touched">
+        El email no tiene un formato válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" type="password" required>
+      <mat-error *ngIf="password?.hasError('required') && password?.touched">
+        La contraseña es obligatoria.
+      </mat-error>
+      <mat-error *ngIf="password?.hasError('minlength') && password?.touched">
+        La contraseña debe tener al menos 6 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Repetir contraseña</mat-label>
+      <input matInput formControlName="repeatPassword" type="password" required>
+      <mat-error *ngIf="repeatPassword?.hasError('required') && repeatPassword?.touched">
+        Debes repetir la contraseña.
+      </mat-error>
+      <mat-error *ngIf="registerForm.hasError('mismatch') && repeatPassword?.touched">
+        Las contraseñas no coinciden.
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+      Registrarse
+    </button>
+    <p class="register">
+      <a routerLink="/login">{{ 'Iniciar sesión' | uppercase }}</a>
+    </p>
+  </form>
+</mat-card>

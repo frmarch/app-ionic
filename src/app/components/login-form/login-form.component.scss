@@ -1,0 +1,55 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 380px;
+  margin-top: 2rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 6px 24px 0 rgba(0,0,0,0.09);
+  border-radius: 18px;
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.3rem;
+}
+
+button[type="submit"] {
+  margin-top: 1.2rem;
+  width: 100%;
+}
+
+.register{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  color: #f3f3f3;
+  cursor: pointer;
+  text-decoration: none;
+  a {
+    text-decoration: none;
+    color: #f3f3f3;
+  }
+}
+
+.forgetpw{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  color: #f3f3f3;
+  cursor: pointer;
+  text-decoration: none;
+  a {
+    font-style: italic;
+    text-decoration: none;
+    color: #f3f3f3;
+  }
+}

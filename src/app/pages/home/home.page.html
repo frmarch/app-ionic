@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="center-content">
+    <mat-card>
+      <h2>Gastos registrados</h2>
+
+      <table class="gastos-table" *ngIf="expenses.length > 0; else noExpenses">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Quién</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let expense of expenses">
+            <td>{{ expense.date | date: 'shortDate' }}</td>
+            <td>{{ expense.categoria }}</td>
+            <td>${{ expense.amount }}</td>
+            <td>{{ expense.quien }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #noExpenses>
+        <p>No hay gastos registrados aún.</p>
+      </ng-template>
+      <button mat-raised-button color="primary" routerLink="/add-expense">
+        Agregar nuevo gasto
+      </button>
+    </mat-card>
+  </div>
+</ion-content>

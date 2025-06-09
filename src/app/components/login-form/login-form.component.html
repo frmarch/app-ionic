@@ -1,0 +1,29 @@
+<mat-card>
+  <h2>Iniciar sesión</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required autocomplete="email">
+      <mat-error *ngIf="email?.hasError('required') && email?.touched">
+        El email es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="email?.hasError('email') && email?.touched">
+        El email no tiene un formato válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" type="password" required autocomplete="current-password">
+      <mat-error *ngIf="password?.hasError('required') && password?.touched">
+        La contraseña es obligatoria.
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+      Iniciar sesión
+    </button>
+    <p class="register"><a routerLink="/register">{{ 'Registrarse' | uppercase }}</a></p>
+    <p class="forgetpw"><a routerLink="/forgetpassword">¿Olvidaste la Contraseña?</a></p>
+  </form>
+</mat-card>

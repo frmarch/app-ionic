@@ -1,0 +1,59 @@
+<mat-card>
+  <h2>Agregar Gasto</h2>
+  <form [formGroup]="expenseForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Monto</mat-label>
+      <input matInput formControlName="monto" type="number" min="1" required>
+      <mat-error *ngIf="monto?.hasError('required') && monto?.touched">
+        El monto es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="monto?.hasError('min') && monto?.touched">
+        El monto debe ser mayor a 0.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Categoría</mat-label>
+      <mat-select formControlName="categoria" required>
+        <mat-option *ngFor="let c of categorias" [value]="c">{{ c }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="categoria?.hasError('required') && categoria?.touched">
+        Selecciona una categoría.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción (opcional)</mat-label>
+      <input matInput formControlName="descripcion">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Quién pagó</mat-label>
+      <mat-select formControlName="quien" required>
+        <mat-option *ngFor="let p of personas" [value]="p">{{ p }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="quien?.hasError('required') && quien?.touched">
+        Selecciona quién pagó.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fecha" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="fecha?.hasError('required') && fecha?.touched">
+        Selecciona la fecha.
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="expenseForm.invalid">
+      Guardar gasto
+    </button>
+    <button mat-raised-button color="accent" type="button" routerLink="/home" style="margin-top: 1rem;">
+      Volver al inicio
+    </button>
+
+
+  </form>
+</mat-card>
