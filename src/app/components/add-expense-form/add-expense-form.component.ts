@@ -17,6 +17,7 @@ export class AddExpenseFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.expenseForm = this.fb.group({
+      currency: ['', Validators.required],
       monto: ['', [Validators.required, Validators.min(1)]],
       categoria: ['', Validators.required],
       descripcion: [''],
@@ -34,6 +35,7 @@ submit() {
 }
 
 
+  get currency() { return this.expenseForm.get('currency'); }
   get monto() { return this.expenseForm.get('monto'); }
   get categoria() { return this.expenseForm.get('categoria'); }
   get quien() { return this.expenseForm.get('quien'); }

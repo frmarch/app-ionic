@@ -25,6 +25,9 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+// Estilos de leaflet
+@import "leaflet/dist/leaflet.css";
+
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
@@ -35,3 +38,14 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+.mi-toast-personalizado {
+  --max-width: 260px;
+  --border-radius: 14px;
+  --background: #252d39;
+  --color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  min-height: 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}

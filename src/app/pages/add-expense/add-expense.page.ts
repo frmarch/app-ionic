@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ExpenseService, Expense } from 'src/app/services/expense.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-add-expense',
@@ -11,18 +13,37 @@ import { Router } from '@angular/router';
 export class AddExpensePage {
   constructor(
     private expenseService: ExpenseService,
-    private router: Router
+    private router: Router,
+    private toastController:  ToastController
   ) {}
 
-  onSave(expenseData: any) {
+ async onSave(expenseData: any) {
     const expense: Expense = {
       description: expenseData.descripcion,
       amount: expenseData.monto,
       date: expenseData.fecha,
       categoria: expenseData.categoria,
-      quien: expenseData.quien
+      quien: expenseData.quien,
+      currency: expenseData.currency
     };
     this.expenseService.addExpense(expense);
+
+    await this.presentToast('¡Gasto agregado con éxito!');
+
     this.router.navigate(['/home']);
   }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color: 'success',
+      position: 'bottom',
+      cssClass: 'mi-toast-personalizado'
+    });
+    await toast.present();
+  }
 }
+
+
+

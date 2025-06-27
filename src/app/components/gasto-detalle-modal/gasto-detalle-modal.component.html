@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalle del Gasto</ion-title>
+    <ion-button slot="end" color="light" (click)="close()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="detalle-modal-content">
+    <div class="detalle-item"><strong>Descripción:</strong> {{ expense.description }}</div>
+    <div class="detalle-item"><strong>Fecha:</strong> {{ expense.date | date }}</div>
+    <div class="detalle-item"><strong>Monto:</strong> {{ expense.amount }} {{ expense.currency }}</div>
+    <div class="detalle-item"><strong>Categoría:</strong> {{ expense.categoria }}</div>
+    <div class="detalle-item"><strong>Quién:</strong> {{ expense.quien }}</div>
+    <div id="map" class="modal-map"></div>
+  </div>
+</ion-content>

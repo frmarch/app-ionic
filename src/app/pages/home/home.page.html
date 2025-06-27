@@ -7,30 +7,55 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <div class="center-content">
     <mat-card>
+      <!-- Select de moneda -->
+      <div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Ver gastos en:</mat-label>
+          <mat-select [(ngModel)]="selectedCurrency">
+            <mat-option value="CLP">CLP</mat-option>
+            <mat-option value="USD">USD</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <h2>Gastos registrados</h2>
 
-      <table class="gastos-table" *ngIf="expenses.length > 0; else noExpenses">
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Quién</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let expense of expenses">
-            <td>{{ expense.date | date: 'shortDate' }}</td>
-            <td>{{ expense.categoria }}</td>
-            <td>${{ expense.amount }}</td>
-            <td>{{ expense.quien }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <ng-container *ngIf="expenses$ | async as expenses">
+        <table class="gastos-table" *ngIf="expenses.length > 0; else noExpenses">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Quién</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of expenses">
+              <td>{{ expense.date | date: 'shortDate' }}</td>
+              <td>{{ expense.categoria }}</td>
+              <td>
+                {{ convert(expense.amount, expense.currency, selectedCurrency) | number:'1.0-0' }}
+                {{ selectedCurrency }}
+              </td>
+              <td>{{ expense.quien }}</td>
+              <td>
+              <ion-button fill="clear" color="success" (click)="verDetalle(expense)">
+                <ion-icon name="eye-outline"></ion-icon>
+              </ion-button>
+              </td>
+              <td>
+                <ion-button fill="clear" color="danger" (click)="confirmDelete(expense)">
+                  <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                </ion-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
 
       <ng-template #noExpenses>
         <p>No hay gastos registrados aún.</p>
