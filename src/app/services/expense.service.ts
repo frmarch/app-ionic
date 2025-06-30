@@ -9,6 +9,8 @@ export interface Expense {
   categoria: string;
   quien: string;
   currency: string;
+  lat?: number;
+  lng?: number;
 }
 
 @Injectable({ providedIn: 'root' })

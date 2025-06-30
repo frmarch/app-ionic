@@ -17,22 +17,21 @@ export class GastoDetalleModalComponent implements AfterViewInit {
   constructor(private modalCtrl: ModalController) {}
 
   ngAfterViewInit() {
-    const lat = (this.expense as any).lat || -33.45;
-    const lng = (this.expense as any).lng || -70.6667;
+    if (this.expense.lat !== undefined && this.expense.lng !== undefined) {
+      const map = L.map('map').setView([this.expense.lat, this.expense.lng], 13);
 
-    const map = L.map('map').setView([lat, lng], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+      L.marker([this.expense.lat, this.expense.lng]).addTo(map)
+        .bindPopup('Gasto')
+        .openPopup();
 
-    L.marker([lat, lng]).addTo(map)
-      .bindPopup('Gasto')
-      .openPopup();
-
-    setTimeout(() => {
-    map.invalidateSize();
-  }, 400);
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 400);
+    }
   }
 
   close() {

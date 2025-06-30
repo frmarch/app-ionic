@@ -31,9 +31,26 @@ submit() {
     this.expenseForm.markAllAsTouched();
     return;
   }
-  this.save.emit(this.expenseForm.value);
-}
 
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const expenseData = {
+        ...this.expenseForm.value,
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      this.save.emit(expenseData);
+    },
+    (error) => {
+      const expenseData = {
+        ...this.expenseForm.value,
+        lat: undefined,
+        lng: undefined
+      };
+      this.save.emit(expenseData);
+    }
+  );
+}
 
   get currency() { return this.expenseForm.get('currency'); }
   get monto() { return this.expenseForm.get('monto'); }

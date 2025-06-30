@@ -1,19 +1,28 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Detalle del Gasto</ion-title>
-    <ion-button slot="end" color="light" (click)="close()">
-      <ion-icon name="close"></ion-icon>
-    </ion-button>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Cerrar</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <div class="detalle-modal-content">
-    <div class="detalle-item"><strong>Descripción:</strong> {{ expense.description }}</div>
-    <div class="detalle-item"><strong>Fecha:</strong> {{ expense.date | date }}</div>
-    <div class="detalle-item"><strong>Monto:</strong> {{ expense.amount }} {{ expense.currency }}</div>
-    <div class="detalle-item"><strong>Categoría:</strong> {{ expense.categoria }}</div>
-    <div class="detalle-item"><strong>Quién:</strong> {{ expense.quien }}</div>
-    <div id="map" class="modal-map"></div>
+  <div class="detalle-modal">
+    <div><strong>Descripción:</strong> {{ expense.description }}</div>
+    <div><strong>Fecha:</strong> {{ expense.date | date }}</div>
+    <div><strong>Monto:</strong> {{ expense.amount }} {{ expense.currency }}</div>
+    <div><strong>Categoría:</strong> {{ expense.categoria }}</div>
+    <div><strong>Quién:</strong> {{ expense.quien }}</div>
+
+    <div *ngIf="expense.lat !== undefined && expense.lng !== undefined; else noUbicacion">
+      <div id="map" style="height: 300px; width: 95%; margin-top: 1rem; border-radius: 12px;"></div>
+    </div>
+    <ng-template #noUbicacion>
+      <div class="no-ubicacion" style="margin-top: 1rem; text-align: center; color: #aaa;">
+        <ion-icon name="location-off-outline" style="font-size: 3rem;"></ion-icon>
+        <div><strong>Ubicación no disponible</strong></div>
+      </div>
+    </ng-template>
+
   </div>
 </ion-content>
