@@ -33,7 +33,7 @@ export class AddExpensePage {
             lng: lng
           };
           await this.expenseService.addExpense(expense);
-          await this.presentToast('¡Gasto agregado con ubicación!');
+          await this.presentToast('¡Gasto agregado con éxito!');
           this.router.navigate(['/home']);
         },
         async (error) => {
